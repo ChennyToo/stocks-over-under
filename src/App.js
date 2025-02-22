@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import './App.css'; // Import your CSS file for styling
 import stockImage from './Images/SSlogo.png'; // Import your image file
 import GameScreen from './GameScreen'; // Import the new GameScreen component
+import {useState, useEffect} from 'react';
 
 function HomeScreen() {
   const navigate = useNavigate();
@@ -33,7 +34,23 @@ function HomeScreen() {
   );
 }
 
+
 function App() {
+  const [bars, setBars] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/crypto-bars');
+        const data = await response.json();
+        console.log(data);
+        setBars(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    })();
+  }, []);
+
   return (
     <Router>
       <Routes>
