@@ -1,0 +1,92 @@
+/* GameScreen.css */
+.game-screen {
+    text-align: center;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a; /* Dark background */
+    color: white; /* Default text color */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Prompt */
+  .prompt {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ffffff; /* White text */
+  }
+  
+  /* Buttons Container */
+  .buttons-container {
+    display: flex;
+    gap: 40px; /* Space between buttons */
+  }
+  
+  /* Image Buttons */
+  .image-button {
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    padding: 0; /* Remove default button padding */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 50%; /* Make the buttons circular */
+    overflow: hidden; /* Ensure the images don't overflow the rounded corners */
+  }
+  
+  .image-button img {
+    width: 200px; /* Adjust size as needed */
+    height: 200px; /* Make the buttons circular */
+    object-fit: cover; /* Ensure the image fits within the circle */
+    border-radius: 50%; /* Make the images circular */
+  }
+  
+  /* Over Button Glow */
+  .image-button.over-button:hover {
+    box-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14; /* Green glow */
+  }
+  
+  /* Under Button Glow */
+  .image-button.under-button:hover {
+    box-shadow: 0 0 20px #ff4444, 0 0 40px #ff4444; /* Red glow */
+  }
+  
+  .image-button:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  
+  .image-button:active {
+    transform: scale(0.95); /* Slightly shrink when clicked */
+  }
+  /* Keyframes for Animations */
+@keyframes slideInFromTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideInFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
