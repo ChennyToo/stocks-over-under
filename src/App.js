@@ -37,13 +37,15 @@ function HomeScreen() {
 
 function App() {
   const [bars, setBars] = useState(null);
+  const tickerSymbol = 'AAPL';
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/crypto-bars');
+        // Add the tickerSymbol as a query parameter
+        const response = await fetch(`http://localhost:3001/api/stock-ticker?symbol=${tickerSymbol}`);
         const data = await response.json();
-        console.log(data);
+        console.log(JSON.stringify(data));
         setBars(data);
       } catch (error) {
         console.error('Error fetching data:', error);
