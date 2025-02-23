@@ -85,7 +85,7 @@ function App() {
 
 
 
-  const getTicker = async (tickerSymbol) => {
+  const getTickerPrice = async (tickerSymbol) => {
     try {
       // Add the tickerSymbol as a query parameter
       const response = await fetch(`http://localhost:3001/api/stock-ticker?symbol=${tickerSymbol}`);
@@ -105,14 +105,14 @@ function App() {
       const randomIndex = Math.floor(Math.random() * sp500Companies.length);
       const randomCompany = sp500Companies[randomIndex];      
       // Fetch data for the random ticker
-      const ticker = await getTicker(randomCompany.symbol);
+      const tickerPrice = await getTickerPrice(randomCompany.symbol);
       // Return both the company info and the fetched data
-      console.log(randomCompany.symbol, randomCompany.name, ticker.price)
+      console.log(randomCompany.symbol, randomCompany.name, tickerPrice)
 
       return {
         symbol: randomCompany.symbol,
         name: randomCompany.name,
-        price: ticker.price,
+        price: tickerPrice,
       };
     } catch (error) {
       console.error('Error in getRandomTicker:', error);
@@ -121,10 +121,6 @@ function App() {
   };
 
 
-
-  useEffect(() => {
-    getRandomTicker();
-  }, []);
 
 
   
