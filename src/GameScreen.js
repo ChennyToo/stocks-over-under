@@ -3,13 +3,25 @@ import './GameScreen.css'; // Import CSS for this screen
 import overButtonImage from './Images/realGreen.jpg'; // Import the "Over" button image
 import underButtonImage from './Images/realRed.webp'; // Import the "Under" button image
 import vsImage from './Images/realVS.jpg'; // Import the "Vs" button image
+import { useEffect, useRef } from 'react';
 
-function GameScreen({ currentTicker, setCurrentTicker, nextTicker, setNextTicker }) {
+function GameScreen({ currentTicker, setCurrentTicker, nextTicker, setNextTicker, initializeGame }) {
   // Function to handle button clicks
   const handleButtonClick = (choice) => {
     alert(`You chose: ${choice}`);
     // Add logic for handling the choice (e.g., navigating to another screen or updating state)
   };
+
+  const renderAfterCalled = useRef(false);
+
+useEffect(() => {
+    if (!renderAfterCalled.current) {
+      initializeGame();
+    }
+
+    renderAfterCalled.current = true;
+}, []);
+
 
   return (
     <div className="game-screen">
@@ -24,8 +36,8 @@ function GameScreen({ currentTicker, setCurrentTicker, nextTicker, setNextTicker
 
       {/* Text Labels */}
       <div className="stock-label stock1">
-        <div>Stcok1</div>
-        <div className="price">$50.00</div>
+        <div>{currentTicker.name}</div>
+        <div className="price">${currentTicker.price}</div>
       </div>
       <div className="stock-label stock2">
         <div>Stock2</div>

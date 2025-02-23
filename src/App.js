@@ -6,11 +6,11 @@ import GameScreen from './GameScreen'; // Import the new GameScreen component
 import {useState, useEffect} from 'react';
 import sp500Companies from './sp500-data.js';
 
-function HomeScreen() {
+function HomeScreen({initializeGame}) {
   const navigate = useNavigate();
 
   // Function to handle button click
-  const handleStart = () => {
+  const handleStart = async () => {
     navigate('/game'); // Navigate to the game screen
   };
 // Disable scrolling 
@@ -44,8 +44,46 @@ useEffect(() => {
 
 
 function App() {
-  const [currentTicker, setCurrentTicker] = useState(null);
-  const [nextTicker, setNextTicker] = useState(null);
+  const loadingValue = {
+    symbol: "LOAD",
+    name: "loading",
+    price: 0,
+  }
+  const [currentTicker, setCurrentTicker] = useState(loadingValue);
+  const [nextTicker, setNextTicker] = useState(loadingValue);
+  const [score, setScore] = useState(0);
+
+  const initializeGame = async () => {
+    const ticker1 = await getRandomTicker();
+    const ticker2 = await getRandomTicker();
+    console.log("Called init game");
+    setCurrentTicker(ticker1);
+    setNextTicker(ticker2);
+    setScore(0);
+  }
+
+  const nextRound = async () => {
+    
+    const newTicker = await getRandomTicker();
+    const prevTicker = nextTicker;
+    const curScore = score + 1;
+    setCurrentTicker(prevTicker);
+    setNextTicker(newTicker);
+    setScore(curScore);
+  }
+
+  const handleGuess = async (isHigher) => {
+    if (nextTicker.price >= currentTicker.price && isHigher){
+      nextRound();
+    }
+    else {
+
+    }
+  }
+
+
+
+
 
   const getTicker = async (tickerSymbol) => {
     try {
@@ -67,12 +105,14 @@ function App() {
       const randomIndex = Math.floor(Math.random() * sp500Companies.length);
       const randomCompany = sp500Companies[randomIndex];      
       // Fetch data for the random ticker
-      const tickerPrice = await getTicker(randomCompany.symbol);
+      const ticker = await getTicker(randomCompany.symbol);
       // Return both the company info and the fetched data
-      console.log(randomCompany.symbol, randomCompany.name, tickerPrice)
+      console.log(randomCompany.symbol, randomCompany.name, ticker.price)
+
       return {
-        company: randomCompany,
-        data: tickerPrice,
+        symbol: randomCompany.symbol,
+        name: randomCompany.name,
+        price: ticker.price,
       };
     } catch (error) {
       console.error('Error in getRandomTicker:', error);
@@ -86,17 +126,21 @@ function App() {
     getRandomTicker();
   }, []);
 
+
+  
+
   return (
     <Router>
       <Routes>
         {/* Home Screen */}
-        <Route path="/" element={<HomeScreen />} />
+        <Route path="/" element={<HomeScreen initializeGame={initializeGame}/>} />
 
         {/* Game Screen */}
         <Route
           path="/game"
           element={
             <GameScreen
+              initializeGame={initializeGame}
               currentTicker={currentTicker}
               setCurrentTicker={setCurrentTicker}
               nextTicker={nextTicker}
