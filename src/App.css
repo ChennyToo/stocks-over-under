@@ -14,6 +14,8 @@
   font-family: Arial, sans-serif;
   padding-top: 40px; /* Add padding to push content below the logo */
   position: relative; /* Required for the overlay */
+  overflow: off; /* Prevent scrollbars during animation */
+
 }
 
 /* Dark overlay */
@@ -27,7 +29,16 @@
   background-color: rgba(0, 0, 0, 0.65); /* Black with 50% opacity */
   z-index: 1; /* Ensure the overlay is above the background image */
 }
-
+/* GameScreen.css */
+/* Prevent scrolling on the body and html */
+/* GameScreen.css */
+/* Prevent scrolling on the body and html */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Disable scrolling */
+  height: 100%; /* Ensure the body and html take up the full viewport height */
+}
 /* Ensure content is above the overlay */
 .App > * {
   position: relative;

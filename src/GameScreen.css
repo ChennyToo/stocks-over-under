@@ -4,24 +4,59 @@
     height: 100vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
     background-color: #1a1a1a; /* Dark background */
     color: white; /* Default text color */
     font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevent scrollbars during animation */
+    position: relative; /* Required for positioning the vertical bar */
+  }
+/* Text Labels */
+.stock-label {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center the text */
+    font-size: 2rem;
+    font-weight: bold;
+    color: white; /* White text */
+    z-index: 2; /* Ensure the labels are above the bar */
+    display: flex;
+    flex-direction: column; /* Stack text vertically */
+    align-items: center; /* Center text horizontally */
   }
   
+  .stock1 {
+    left: 25%; /* Position to the left of the VS bar */
+  }
+  
+  .stock2 {
+    right: 25%; /* Position to the right of the VS bar */
+  }
+  
+  /* Price Text */
+  .price {
+    font-size: 1.5rem;
+    margin-top: 10px; /* Add space between stock name and price */
+    color: #cccccc; /* Light gray text */
+  }
   /* Prompt */
   .prompt {
     font-size: 2.5rem;
     margin-bottom: 40px;
     color: #ffffff; /* White text */
+    z-index: 1 /* Move the bar to the background */
   }
   
-  /* Buttons Container */
   .buttons-container {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    right: 20px; /* Position on the right side */
+    transform: translateY(-50%); /* Center the container */
     display: flex;
-    gap: 40px; /* Space between buttons */
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 20px; /* Space between buttons */
+    z-index: 2; /* Ensure the buttons are above the bar */
   }
   
   /* Image Buttons */
@@ -33,11 +68,13 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 50%; /* Make the buttons circular */
     overflow: hidden; /* Ensure the images don't overflow the rounded corners */
+    margin-right: 60px;
+
   }
   
   .image-button img {
-    width: 200px; /* Adjust size as needed */
-    height: 200px; /* Make the buttons circular */
+    width: 175px; /* Adjust size as needed */
+    height: 175px; /* Make the buttons circular */
     object-fit: cover; /* Ensure the image fits within the circle */
     border-radius: 50%; /* Make the images circular */
   }
@@ -59,34 +96,38 @@
   .image-button:active {
     transform: scale(0.95); /* Slightly shrink when clicked */
   }
-  /* Keyframes for Animations */
-@keyframes slideInFromTop {
-    0% {
-      opacity: 0;
-      transform: translateY(-100%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Vertical Red Bar */
+.vertical-bar {
+    position: absolute;
+    top: 0;
+    left: 50%; /* Center the bar */
+    width: 4px; /* Bar thickness */
+    height: 100%; /* Full height of the screen */
+    background-color: #3ca7dc; /* Red color */
+    box-shadow: 0 0 10px #3ca7dc, 0 0 20px #3ca7dc; /* Red glow */
+    transform: translateX(-50%); /* Center the bar */
+    z-index: 0; /* Move the bar to the background */
+    margin-top:80px;
   }
   
-  @keyframes slideInFromBottom {
-    0% {
-      opacity: 0;
-      transform: translateY(100%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .vs-image {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the image */
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Adjust size as needed */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure the image fits within the circle */
+    box-shadow: 0 0 10px #3ca7dc, 0 0 20px #3ca7dc; /* Red glow */
+
   }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+  .score-text {
+    position: absolute;
+    bottom: 20px; /* Position at the bottom */
+    right: 20px; /* Position at the right */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white; /* White text */
+    z-index: 2; /* Ensure the score text is above the bar */
   }

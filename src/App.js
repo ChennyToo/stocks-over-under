@@ -12,8 +12,15 @@ function HomeScreen() {
   const handleStart = () => {
     navigate('/game'); // Navigate to the game screen
   };
-
+// Disable scrolling 
+useEffect(() => {
+  document.body.style.overflow = 'hidden'; // Disable scrolling
+  return () => {
+    document.body.style.overflow = 'auto'; // Re-enable scrolling when the component unmounts
+  };
+}, []);
   return (
+    
     <div className="App">
       {/* Rounded Image */}
       <img src={stockImage} alt="Stock" className="rounded-image" />
@@ -23,7 +30,7 @@ function HomeScreen() {
 
       {/* Description */}
       <p className="description">
-        Put your knowledge to the test by simply deciding if you think a stock price is Over or Under the given price
+        Put your knowledge to the test by simply deciding if you think a stock price is Over or Under another stock price
       </p>
 
       {/* Start Button */}
@@ -36,6 +43,7 @@ function HomeScreen() {
 
 
 function App() {
+  // eslint-disable-next-line
   const [bars, setBars] = useState(null);
 
   useEffect(() => {
