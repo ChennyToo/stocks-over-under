@@ -4,6 +4,7 @@ import './App.css'; // Import your CSS file for styling
 import stockImage from './Images/SSlogo.png'; // Import your image file
 import GameScreen from './GameScreen'; // Import the new GameScreen component
 import {useState, useEffect} from 'react';
+import sp500Companies from './sp500-data.js';
 
 function HomeScreen() {
   const navigate = useNavigate();
@@ -36,22 +37,50 @@ function HomeScreen() {
 
 
 function App() {
-  const [bars, setBars] = useState(null);
-  const tickerSymbol = 'AAPL';
+  const [currentTicker, setCurrentTicker] = useState(null);
+  const [nextTicker, setNextTicker] = useState(null);
+
+  const getTicker = async (tickerSymbol) => {
+    try {
+      // Add the tickerSymbol as a query parameter
+      const response = await fetch(`http://localhost:3001/api/stock-ticker?symbol=${tickerSymbol}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const tickerPrice = await response.json();
+      return tickerPrice;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const getRandomTicker = async () => {
+    try {
+      // Get a random company from the list
+      const randomIndex = Math.floor(Math.random() * sp500Companies.length);
+      const randomCompany = sp500Companies[randomIndex];      
+      // Fetch data for the random ticker
+      const tickerPrice = await getTicker(randomCompany.symbol);
+      // Return both the company info and the fetched data
+      console.log(randomCompany.symbol, randomCompany.name, tickerPrice)
+      return {
+        company: randomCompany,
+        data: tickerPrice,
+      };
+    } catch (error) {
+      console.error('Error in getRandomTicker:', error);
+      throw error;
+    }
+  };
+
+
 
   useEffect(() => {
-    (async () => {
-      try {
-        // Add the tickerSymbol as a query parameter
-        const response = await fetch(`http://localhost:3001/api/stock-ticker?symbol=${tickerSymbol}`);
-        const data = await response.json();
-        console.log(JSON.stringify(data));
-        setBars(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    })();
+    getRandomTicker();
   }, []);
+
+
+  
 
   return (
     <Router>

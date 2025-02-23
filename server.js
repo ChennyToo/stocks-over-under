@@ -15,7 +15,6 @@ const alpaca = new Alpaca({
 
 
 
-
 app.get('/api/stock-ticker', async (req, res) => {
   try {
     const tickerSymbol = req.query.symbol; // Get the ticker symbol from the query parameter
