@@ -40,8 +40,8 @@ useEffect(() => {
         <div className="price">${currentTicker.price}</div>
       </div>
       <div className="stock-label stock2">
-        <div>Stock2</div>
-        <div className="price">$150.00</div>
+        <div>{nextTicker.name}</div>
+        <div className="price">${nextTicker.price}</div>
       </div>
 
          {/* Score Text */}
