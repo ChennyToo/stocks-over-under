@@ -27,11 +27,11 @@
   }
   
   .stock1 {
-    left: 25%; /* Position to the left of the VS bar */
+    left: 9%; /* Position to the left of the VS bar */
   }
   
   .stock2 {
-    right: 25%; /* Position to the right of the VS bar */
+    right: 20%; /* Position to the right of the VS bar */
   }
   
   /* Price Text */
