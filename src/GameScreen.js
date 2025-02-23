@@ -5,10 +5,10 @@ import underButtonImage from './Images/realRed.webp'; // Import the "Under" butt
 import vsImage from './Images/realVS.jpg'; // Import the "Vs" button image
 import { useEffect, useRef } from 'react';
 
-function GameScreen({ currentTicker, setCurrentTicker, nextTicker, setNextTicker, initializeGame }) {
+function GameScreen({ currentTicker, nextTicker, initializeGame, handleGuess, score }) {
   // Function to handle button clicks
   const handleButtonClick = (choice) => {
-    alert(`You chose: ${choice}`);
+    handleGuess(choice);
     // Add logic for handling the choice (e.g., navigating to another screen or updating state)
   };
 
@@ -45,19 +45,19 @@ useEffect(() => {
       </div>
 
          {/* Score Text */}
-      <div className="score-text">Score: 0</div>
+      <div className="score-text">Score: {score}</div>
 
       {/* Buttons */}
       <div className="buttons-container">
         <button
           className="image-button over-button"
-          onClick={() => handleButtonClick('Over')}
+          onClick={() => handleButtonClick(true)}
         >
           <img src={overButtonImage} alt="Over" />
         </button>
         <button
           className="image-button under-button"
-          onClick={() => handleButtonClick('Under')}
+          onClick={() => handleButtonClick(false)}
         >
           <img src={underButtonImage} alt="Under" />
         </button>

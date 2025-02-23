@@ -76,8 +76,14 @@ function App() {
     if (nextTicker.price >= currentTicker.price && isHigher){
       nextRound();
     }
-    else {
 
+    else if (nextTicker.price <= currentTicker.price && !isHigher){
+      nextRound();
+    }
+
+    else {
+      alert("You Lose")
+      initializeGame()
     }
   }
 
@@ -141,6 +147,8 @@ function App() {
               setCurrentTicker={setCurrentTicker}
               nextTicker={nextTicker}
               setNextTicker={setNextTicker}
+              handleGuess={handleGuess}
+              score={score}
             />
           }
         />
