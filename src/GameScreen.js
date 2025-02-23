@@ -4,7 +4,7 @@ import overButtonImage from './Images/realGreen.jpg'; // Import the "Over" butto
 import underButtonImage from './Images/realRed.webp'; // Import the "Under" button image
 import vsImage from './Images/realVS.jpg'; // Import the "Vs" button image
 
-function GameScreen() {
+function GameScreen({ currentTicker, setCurrentTicker, nextTicker, setNextTicker }) {
   // Function to handle button clicks
   const handleButtonClick = (choice) => {
     alert(`You chose: ${choice}`);
