@@ -12,7 +12,7 @@ function GameScreen({ currentTicker, setCurrentTicker, nextTicker, setNextTicker
     // Add logic for handling the choice (e.g., navigating to another screen or updating state)
   };
 
-  const renderAfterCalled = useRef(false);
+const renderAfterCalled = useRef(false);
 
 useEffect(() => {
     if (!renderAfterCalled.current) {
