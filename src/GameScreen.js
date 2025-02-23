@@ -28,7 +28,7 @@ function GameScreen({ currentTicker, setCurrentTicker, nextTicker, setNextTicker
         <div className="price">$50.00</div>
       </div>
       <div className="stock-label stock2">
-        <div>Stock</div>
+        <div>Stock2</div>
         <div className="price">$150.00</div>
       </div>
 
