@@ -86,14 +86,24 @@ function App() {
     getRandomTicker();
   }, []);
 
-
-  
-
   return (
     <Router>
       <Routes>
+        {/* Home Screen */}
         <Route path="/" element={<HomeScreen />} />
-        <Route path="/game" element={<GameScreen />} />
+
+        {/* Game Screen */}
+        <Route
+          path="/game"
+          element={
+            <GameScreen
+              currentTicker={currentTicker}
+              setCurrentTicker={setCurrentTicker}
+              nextTicker={nextTicker}
+              setNextTicker={setNextTicker}
+            />
+          }
+        />
       </Routes>
     </Router>
   );

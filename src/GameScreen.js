@@ -24,11 +24,11 @@ function GameScreen({ currentTicker, setCurrentTicker, nextTicker, setNextTicker
 
       {/* Text Labels */}
       <div className="stock-label stock1">
-        <div>Stock1</div>
+        <div>Stcok1</div>
         <div className="price">$50.00</div>
       </div>
       <div className="stock-label stock2">
-        <div>Stock2</div>
+        <div>Stock</div>
         <div className="price">$150.00</div>
       </div>
 
